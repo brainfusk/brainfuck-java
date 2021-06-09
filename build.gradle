@@ -1,0 +1,31 @@
+allprojects {
+    apply plugin: 'idea'
+    group 'com.techzealot'
+    version '1.0-SNAPSHOT'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    tasks.withType(JavaCompile) {
+        options.encoding = 'UTF-8'
+    }
+    //全局依赖版本声明
+    ext{
+
+    }
+    dependencies {
+
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+

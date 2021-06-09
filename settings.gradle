@@ -1,0 +1,5 @@
+rootProject.name = 'brainfuck-java'
+include 'brainfuck'
+include 'brainfuck-interpreter'
+include 'brainfuck-jit'
+
