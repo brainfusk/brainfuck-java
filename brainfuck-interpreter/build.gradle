@@ -1,2 +1,5 @@
 
 
+dependencies {
+    implementation group: 'com.carrotsearch', name: 'hppc', version: '0.9.0'
+}
