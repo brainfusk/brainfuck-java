@@ -1,3 +1,11 @@
+plugins {
+
+}
 dependencies {
+    implementation project(':brainfuck-oop')
     implementation group: 'com.carrotsearch', name: 'hppc', version: "$hppcVersion"
+}
+
+test {
+
 }

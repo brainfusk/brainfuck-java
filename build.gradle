@@ -17,11 +17,41 @@ subprojects {
         options.encoding = 'UTF-8'
     }
     //全局依赖版本声明
-    ext{
-
+    ext {
+        hppcVersion = '0.9.0'
+        lombokVersion = '1.18.20'
+        spockReportsVersion = '2.0-groovy-3.0'
+        groovyVersion = '3.0.7'
     }
     dependencies {
+        compileOnly "org.projectlombok:lombok:$lombokVersion"
+        annotationProcessor "org.projectlombok:lombok:$lombokVersion"
 
+        testCompileOnly "org.projectlombok:lombok:$lombokVersion"
+        testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+
+        // mandatory dependencies for using Spock
+        implementation "org.codehaus.groovy:groovy:$groovyVersion"
+        testImplementation platform("org.spockframework:spock-bom:2.0-M4-groovy-3.0")
+        testImplementation "org.spockframework:spock-core"
+        //testCompile "org.spockframework:spock-junit4"  // you can remove this if your code does not rely on old JUnit 4 rules
+
+        // optional dependencies for using Spock
+        testImplementation "org.hamcrest:hamcrest-core:2.2"   // only necessary if Hamcrest matchers are used
+        testImplementation "net.bytebuddy:byte-buddy:1.10.10" // allows mocking of classes (in addition to interfaces)
+        testImplementation "org.objenesis:objenesis:3.1"
+        // allows mocking of classes without default constructor (together with ByteBuddy or CGLIB)
+
+        // you can use testRuntimeClasspath if you don't want to use spock-report-specific features in your Specs
+        testImplementation("com.athaydes:spock-reports:$spockReportsVersion") {
+            transitive = false // this avoids affecting your version of Groovy/Spock
+        }
+        //spock report dependencies
+        implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
+        implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
+        implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
+        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-logging', version: '2.4.6'
     }
 
     test {
