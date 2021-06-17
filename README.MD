@@ -6,8 +6,8 @@ benchmark:
 
 compiler:
 
--[ ] token -> IR(HIR) <-> optimizer -> nasm
+- [ ] token -> IR(HIR) <-> optimizer -> nasm
 
 jit:
 
--[ ] IR -> JNA
+- [ ] IR -> JNA
