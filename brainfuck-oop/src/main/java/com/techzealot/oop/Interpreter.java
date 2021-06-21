@@ -2,9 +2,9 @@ package com.techzealot.oop;
 
 import com.carrotsearch.hppc.IntIntMap;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
-
+@Slf4j
 public class Interpreter {
 
     private final byte[] tape = new byte[1024 * 1024];
@@ -81,9 +81,9 @@ public class Interpreter {
                 }
             }
         }
-        System.out.println(MessageFormat.format("shrCount:{0} ,shlCount:{1} ,addCount:{2} ,subCount:{3} ,putcharCount:{4} ,getCharCount:{5} ,lbCount:{6} ,rbCount:{7} ",
-                shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, lbCount, rbCount));
-        System.out.println(MessageFormat.format("sum : {0}", count));
-        System.out.println(MessageFormat.format("oop cost: {0}s", (System.currentTimeMillis() - start) / 1000));
+        log.info("program:{} ,shrCount:{} ,shlCount:{} ,addCount:{} ,subCount:{} ,putcharCount:{} ,getCharCount:{} ,lbCount:{} ,rbCount:{} ",
+                System.getProperty("programName"),shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, lbCount, rbCount);
+        log.info("sum : {}", count);
+        log.info("oop cost: {}ms", System.currentTimeMillis() - start);
     }
 }

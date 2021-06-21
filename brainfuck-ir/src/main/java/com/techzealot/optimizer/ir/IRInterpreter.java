@@ -1,13 +1,19 @@
 package com.techzealot.optimizer.ir;
 
 import com.techzealot.oop.Code;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
-
+@Slf4j
 public class IRInterpreter {
 
     private final byte[] tape = new byte[1024 * 1024];
+
+    @Getter
+    @Setter
+    private boolean enableOptimizer;
 
     @SneakyThrows
     public void run(byte[] program) {
@@ -15,6 +21,9 @@ public class IRInterpreter {
         Code code = new Code(program);
         IRCode irCode = new IRCode(code.getInstructions());
         Instruction[] instructions = irCode.getInstructions();
+        if (enableOptimizer) {
+            instructions = Optimizer.peephole(instructions);
+        }
         int size = instructions.length;
         int tapePointer = 0;
         long shrCount = 0;
@@ -25,6 +34,7 @@ public class IRInterpreter {
         long getcharCount = 0;
         long jizCount = 0;
         long jnzCount = 0;
+        long setnCount = 0;
         long count = 0;
         for (int pc = 0; pc < size; pc++) {
             count++;
@@ -77,14 +87,18 @@ public class IRInterpreter {
                     }
                     break;
                 }
+                case SET_N: {
+                    setnCount++;
+                    tape[tapePointer] = (byte) inst.getOperand();
+                    break;
+                }
                 default: {
                     throw new UnsupportedOperationException();
                 }
             }
         }
-        System.out.println(MessageFormat.format("shrCount:{0} ,shlCount:{1} ,addCount:{2} ,subCount:{3} ,putcharCount:{4} ,getCharCount:{5} ,jizCount:{6} ,jnzCount:{7} ",
-                shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, jizCount, jnzCount));
-        System.out.println(MessageFormat.format("sum : {0}", count));
-        System.out.println(MessageFormat.format("ir cost: {0}s", (System.currentTimeMillis() - start) / 1000));
+        log.info("program:{} ,shrCount:{} ,shlCount:{} ,addCount:{} ,subCount:{} ,putcharCount:{} ,getCharCount:{} ,jizCount:{} ,jnzCount:{} ,setnCount:{} ", System.getProperty("programName"),shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, jizCount, jnzCount, setnCount);
+        log.info("sum : {}", count);
+        log.info("ir cost: {} ms", (System.currentTimeMillis() - start));
     }
 }

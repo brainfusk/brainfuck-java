@@ -15,6 +15,7 @@ public class IRMain {
             throw new IllegalArgumentException("must input a bf program file in resources");
         }
         String programName = args[0];
+        System.setProperty("programName",programName);
         URL url = IRMain.class.getResource("/programs/" + programName);
         if (url == null) {
             throw new IllegalArgumentException(MessageFormat.format("cannot find the bf program file {0} in resources", programName));
@@ -22,6 +23,9 @@ public class IRMain {
         byte[] program = Files.readAllBytes(Paths.get(url.toURI()));
         //2.execute
         IRInterpreter interpreter = new IRInterpreter();
+        if ("true".equals(System.getProperty("enableOptimizer"))) {
+            interpreter.setEnableOptimizer(true);
+        }
         interpreter.run(program);
     }
 }

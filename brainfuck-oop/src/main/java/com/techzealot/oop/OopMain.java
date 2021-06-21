@@ -15,6 +15,7 @@ public class OopMain {
             throw new IllegalArgumentException("must input a bf program file in resources");
         }
         String programName = args[0];
+        System.setProperty("programName",programName);
         URL url = OopMain.class.getResource("/programs/" + programName);
         if (url == null) {
             throw new IllegalArgumentException(MessageFormat.format("cannot find the bf program file {0} in resources", programName));
