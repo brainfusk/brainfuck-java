@@ -59,5 +59,8 @@ subprojects {
     test {
         useJUnitPlatform()
     }
+    task cleanLogs(type: Delete) {
+        delete 'logs'
+    }
 }
 

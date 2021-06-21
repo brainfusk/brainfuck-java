@@ -1,22 +1,20 @@
-package com.techzealot.oop;
+package com.techzealot.oop.vm;
 
 import com.carrotsearch.hppc.IntIntMap;
+import com.techzealot.oop.compiler.Code;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class Interpreter {
+public class SimpleInterpreter implements Interpreter {
 
-    private final byte[] tape = new byte[1024 * 1024];
 
     @SneakyThrows
-    public void run(byte[] program) {
+    public void run(Machine machine, Code code) {
         long start = System.currentTimeMillis();
-        Code code = new Code(program);
         IntIntMap jumpTable = code.getJumpTable();
         OpCode[] instructions = code.getInstructions();
         int size = instructions.length;
-        int tapePointer = 0;
         long shrCount = 0;
         long shlCount = 0;
         long addCount = 0;
@@ -26,53 +24,51 @@ public class Interpreter {
         long lbCount = 0;
         long rbCount = 0;
         long count = 0;
-        for (int pc = 0; pc < size; pc++) {
+        while (machine.currentPc() < size) {
             count++;
-            OpCode inst = instructions[pc];
+            OpCode inst = instructions[machine.currentPc()];
             switch (inst) {
                 case SHR: {
                     shrCount++;
-                    tapePointer++;
+                    machine.shiftRight(1);
                     break;
                 }
                 case SHL: {
                     shlCount++;
-                    if (tapePointer > 0) {
-                        tapePointer--;
-                    }
+                    machine.shiftLeft(1);
                     break;
                 }
                 case ADD: {
                     addCount++;
-                    tape[tapePointer]++;
+                    machine.incrementBy(1);
                     break;
                 }
                 case SUB: {
                     subCount++;
-                    tape[tapePointer]--;
+                    machine.decrementBy(1);
                     break;
                 }
                 case PUT_CHAR: {
                     putcharCount++;
-                    System.out.printf("%c", tape[tapePointer] & 0xff);
+                    machine.putChar();
                     break;
                 }
                 case GET_CHAR: {
                     getcharCount++;
-                    tape[tapePointer] = (byte) System.in.read();
+                    machine.getChar();
                     break;
                 }
                 case LB: {
                     lbCount++;
-                    if (tape[tapePointer] == 0) {
-                        pc = jumpTable.get(pc);
+                    if (machine.currentData() == 0) {
+                        machine.jump(jumpTable.get(machine.currentPc()));
                     }
                     break;
                 }
                 case RB: {
                     rbCount++;
-                    if (tape[tapePointer] != 0) {
-                        pc = jumpTable.get(pc);
+                    if (machine.currentData() != 0) {
+                        machine.jump(jumpTable.get(machine.currentPc()));
                     }
                     break;
                 }
@@ -80,6 +76,7 @@ public class Interpreter {
                     throw new UnsupportedOperationException();
                 }
             }
+            machine.nextPc();
         }
         log.info("program:{} ,shrCount:{} ,shlCount:{} ,addCount:{} ,subCount:{} ,putcharCount:{} ,getCharCount:{} ,lbCount:{} ,rbCount:{} ",
                 System.getProperty("programName"), shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, lbCount, rbCount);

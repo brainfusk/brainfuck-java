@@ -1,7 +1,7 @@
 package com.techzealot.optimizer.ir;
 
 import com.carrotsearch.hppc.IntStack;
-import com.techzealot.oop.OpCode;
+import com.techzealot.oop.vm.OpCode;
 import lombok.Data;
 
 import java.util.ArrayList;

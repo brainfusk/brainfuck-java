@@ -2,7 +2,7 @@ TODO
 
 benchmark:
 
-- [ ] 使用JMH进行测试
+- [x] 使用JMH进行测试
 
 compiler:
 

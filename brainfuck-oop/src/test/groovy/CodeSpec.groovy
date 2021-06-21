@@ -1,5 +1,5 @@
-import com.techzealot.oop.Code
-import com.techzealot.oop.OpCode
+import com.techzealot.oop.compiler.Code
+import com.techzealot.oop.vm.OpCode
 import spock.lang.Specification
 
 class CodeSpec extends Specification {

@@ -1,9 +1,10 @@
 package com.techzealot.optimizer.ir;
 
+import com.techzealot.oop.compiler.Code;
+import com.techzealot.oop.compiler.Compiler;
+import com.techzealot.oop.vm.Interpreter;
+import com.techzealot.oop.vm.Machine;
 import lombok.SneakyThrows;
-import org.apache.commons.io.IOUtils;
-
-import java.util.Objects;
 
 public class IRMain {
     @SneakyThrows
@@ -14,12 +15,12 @@ public class IRMain {
         }
         String programName = args[0];
         System.setProperty("programName", programName);
-        byte[] program = IOUtils.toByteArray(Objects.requireNonNull(IRMain.class.getResourceAsStream("/programs/" + programName)));
-        //2.execute
-        IRInterpreter interpreter = new IRInterpreter();
-        if ("true".equals(System.getProperty("enableOptimizer"))) {
-            interpreter.setEnableOptimizer(true);
-        }
-        interpreter.run(program);
+        //2.compile program
+        Compiler compiler = new Compiler();
+        Code code = compiler.compile(programName);
+        Interpreter interpreter = new IRInterpreter();
+        //3.execute code
+        Machine machine = new Machine(System.in, System.out, interpreter);
+        machine.execute(code);
     }
 }

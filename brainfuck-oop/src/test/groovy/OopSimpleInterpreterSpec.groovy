@@ -1,9 +1,9 @@
-import com.techzealot.optimizer.ir.IRMain
+import com.techzealot.oop.OopMain
 import spock.lang.Specification
 
 
-class IRInterpreterSpec extends Specification {
-    def "test ir interpreter with optimizer on/off"(String program, boolean enableOptimizer) {
+class OopSimpleInterpreterSpec extends Specification {
+    def "test oop interpreter"(String program) {
         when:
         def expectFile = System.getProperty("user.dir") + File.separator + "src/test/resources" + File.separator + program + ".txt"
         def outFile = System.getProperty("user.dir") + File.separator + "build" + File.separator + program + ".txt"
@@ -11,23 +11,16 @@ class IRInterpreterSpec extends Specification {
         def out = new PrintStream(outFile)
         def tmp = System.out;
         System.setOut(out)
-        if (enableOptimizer) {
-            System.setProperty("enableOptimizer", "true")
-        }
-        IRMain.main(new String[]{program})
+        OopMain.main(new String[]{program})
         System.out.flush()
         System.setOut(tmp)
         then:
         new File(outFile).text == new File(expectFile).text
         where:
-        program         | enableOptimizer
-        "hello.bf"      | false
-        "666.bf"        | false
-        "sierpinski.bf" | false
-        "mandelbrot.bf" | false
-        "hello.bf"      | true
-        "666.bf"        | true
-        "sierpinski.bf" | true
-        "mandelbrot.bf" | true
+        program         | _
+        "hello.bf"      | _
+        "666.bf"        | _
+        "sierpinski.bf" | _
+        //"mandelbrot.bf" | _
     }
 }

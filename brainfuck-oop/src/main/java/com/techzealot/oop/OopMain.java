@@ -1,12 +1,12 @@
 package com.techzealot.oop;
 
-import lombok.SneakyThrows;
-import org.apache.commons.io.IOUtils;
-
-import java.util.Objects;
+import com.techzealot.oop.compiler.Code;
+import com.techzealot.oop.compiler.Compiler;
+import com.techzealot.oop.vm.Machine;
+import com.techzealot.oop.vm.SimpleInterpreter;
 
 public class OopMain {
-    @SneakyThrows
+
     public static void main(String[] args) {
         //1.prepare program data
         if (args.length != 1) {
@@ -14,9 +14,11 @@ public class OopMain {
         }
         String programName = args[0];
         System.setProperty("programName", programName);
-        byte[] program = IOUtils.toByteArray(Objects.requireNonNull(OopMain.class.getResourceAsStream("/programs/" + programName)));
-        //2.execute
-        Interpreter interpreter = new Interpreter();
-        interpreter.run(program);
+        //2.compile program
+        Compiler compiler = new Compiler();
+        Code code = compiler.compile(programName);
+        //3.execute
+        Machine machine = new Machine(System.in, System.out, new SimpleInterpreter());
+        machine.execute(code);
     }
 }

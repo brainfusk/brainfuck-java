@@ -1,4 +1,4 @@
-import com.techzealot.oop.Code
+import com.techzealot.oop.compiler.Code
 import com.techzealot.optimizer.ir.IR
 import com.techzealot.optimizer.ir.IRCode
 import com.techzealot.optimizer.ir.Instruction
