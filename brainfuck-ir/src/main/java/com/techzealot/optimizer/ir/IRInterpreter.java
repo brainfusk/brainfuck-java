@@ -97,7 +97,7 @@ public class IRInterpreter {
                 }
             }
         }
-        log.info("program:{} ,shrCount:{} ,shlCount:{} ,addCount:{} ,subCount:{} ,putcharCount:{} ,getCharCount:{} ,jizCount:{} ,jnzCount:{} ,setnCount:{} ", System.getProperty("programName"),shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, jizCount, jnzCount, setnCount);
+        log.info("program:{} ,shrCount:{} ,shlCount:{} ,addCount:{} ,subCount:{} ,putcharCount:{} ,getCharCount:{} ,jizCount:{} ,jnzCount:{} ,setnCount:{} ", System.getProperty("programName"), shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, jizCount, jnzCount, setnCount);
         log.info("sum : {}", count);
         log.info("ir cost: {} ms", (System.currentTimeMillis() - start));
     }

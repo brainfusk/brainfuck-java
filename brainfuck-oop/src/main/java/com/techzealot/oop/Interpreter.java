@@ -82,7 +82,7 @@ public class Interpreter {
             }
         }
         log.info("program:{} ,shrCount:{} ,shlCount:{} ,addCount:{} ,subCount:{} ,putcharCount:{} ,getCharCount:{} ,lbCount:{} ,rbCount:{} ",
-                System.getProperty("programName"),shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, lbCount, rbCount);
+                System.getProperty("programName"), shrCount, shlCount, addCount, subCount, putcharCount, getcharCount, lbCount, rbCount);
         log.info("sum : {}", count);
         log.info("oop cost: {}ms", System.currentTimeMillis() - start);
     }

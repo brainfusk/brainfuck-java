@@ -14,7 +14,6 @@ public class Optimizer {
      * [->(n)+<(n)] 讲当前位置值加到从当前开始第n个位置，并将当前数据置0
      * [+>(n)-<(n)]
      *
-     *
      * @param mirs
      * @return
      */
@@ -38,10 +37,10 @@ public class Optimizer {
                     }
                     //不满足优化条件原样放回
                     instructionList.add(instruction);
-                    jumpStack.push(instructionList.size()-1);
+                    jumpStack.push(instructionList.size() - 1);
                     break;
                 }
-                case JNZ:{
+                case JNZ: {
                     //互相设置跳转地址
                     int jizIndex = jumpStack.pop();
                     instructionList.add(new Instruction(IR.JNZ, jizIndex));

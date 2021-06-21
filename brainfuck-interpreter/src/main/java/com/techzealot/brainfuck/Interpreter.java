@@ -4,13 +4,11 @@ import com.carrotsearch.hppc.IntIntHashMap;
 import com.carrotsearch.hppc.IntIntMap;
 import com.carrotsearch.hppc.IntStack;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.MessageFormat;
+import java.util.Objects;
 
 @Slf4j
 public class Interpreter {
@@ -46,11 +44,7 @@ public class Interpreter {
             throw new IllegalArgumentException("must input a bf program file in resources");
         }
         String programName = args[0];
-        URL url = Interpreter.class.getResource("/programs/" + programName);
-        if (url == null) {
-            throw new IllegalArgumentException(MessageFormat.format("cannot find the bf program file {0} in resources", programName));
-        }
-        byte[] program = Files.readAllBytes(Paths.get(url.toURI()));
+        byte[] program = IOUtils.toByteArray(Objects.requireNonNull(Interpreter.class.getResourceAsStream("/programs/" + programName)));
         long start = System.currentTimeMillis();
         IntIntMap jumps = preProcess(program);
         int shrCount = 0;

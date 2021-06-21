@@ -1,11 +1,9 @@
 package com.techzealot.optimizer.ir;
 
 import lombok.SneakyThrows;
+import org.apache.commons.io.IOUtils;
 
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.text.MessageFormat;
+import java.util.Objects;
 
 public class IRMain {
     @SneakyThrows
@@ -15,12 +13,8 @@ public class IRMain {
             throw new IllegalArgumentException("must input a bf program file in resources");
         }
         String programName = args[0];
-        System.setProperty("programName",programName);
-        URL url = IRMain.class.getResource("/programs/" + programName);
-        if (url == null) {
-            throw new IllegalArgumentException(MessageFormat.format("cannot find the bf program file {0} in resources", programName));
-        }
-        byte[] program = Files.readAllBytes(Paths.get(url.toURI()));
+        System.setProperty("programName", programName);
+        byte[] program = IOUtils.toByteArray(Objects.requireNonNull(IRMain.class.getResourceAsStream("/programs/" + programName)));
         //2.execute
         IRInterpreter interpreter = new IRInterpreter();
         if ("true".equals(System.getProperty("enableOptimizer"))) {
