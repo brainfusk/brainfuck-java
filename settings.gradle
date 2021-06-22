@@ -2,7 +2,6 @@ rootProject.name = 'brainfuck-java'
 include 'brainfuck-ir'
 include 'brainfuck-interpreter'
 include 'brainfuck-oop'
-include 'brainfuck-compiler'
 include 'brainfuck-benchmark'
 include 'brainfuck-jit'
 
