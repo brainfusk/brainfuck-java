@@ -6,6 +6,12 @@ allprojects {
         mavenLocal()
         mavenCentral()
     }
+    idea {
+        module {
+            downloadJavadoc = true
+            downloadSources = true
+        }
+    }
 }
 
 subprojects {
