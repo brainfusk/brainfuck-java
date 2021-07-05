@@ -1,4 +1,4 @@
-package com.techzealot.oop.vm;
+package com.techzealot.brainfuck.oop.vm;
 
 import lombok.Getter;
 

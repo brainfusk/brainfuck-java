@@ -1,7 +1,7 @@
-import com.techzealot.oop.compiler.Code
-import com.techzealot.optimizer.ir.IR
-import com.techzealot.optimizer.ir.IRCode
-import com.techzealot.optimizer.ir.Instruction
+import com.techzealot.brainfuck.oop.compiler.Code
+import com.techzealot.brainfuck.optimizer.ir.IR
+import com.techzealot.brainfuck.optimizer.ir.IRCode
+import com.techzealot.brainfuck.optimizer.ir.Instruction
 import spock.lang.Specification
 
 class IRCodeSpec extends Specification {

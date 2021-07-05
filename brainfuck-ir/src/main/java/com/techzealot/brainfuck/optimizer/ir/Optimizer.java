@@ -1,4 +1,4 @@
-package com.techzealot.optimizer.ir;
+package com.techzealot.brainfuck.optimizer.ir;
 
 import com.carrotsearch.hppc.IntStack;
 

@@ -1,4 +1,4 @@
-import com.techzealot.oop.OopMain
+import com.techzealot.brainfuck.oop.OopMain
 import spock.lang.Specification
 
 

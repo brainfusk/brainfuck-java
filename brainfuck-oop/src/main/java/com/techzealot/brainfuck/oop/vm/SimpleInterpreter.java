@@ -1,7 +1,7 @@
-package com.techzealot.oop.vm;
+package com.techzealot.brainfuck.oop.vm;
 
 import com.carrotsearch.hppc.IntIntMap;
-import com.techzealot.oop.compiler.Code;
+import com.techzealot.brainfuck.oop.compiler.Code;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,9 +1,9 @@
-package com.techzealot.oop.compiler;
+package com.techzealot.brainfuck.oop.compiler;
 
 import com.carrotsearch.hppc.IntIntHashMap;
 import com.carrotsearch.hppc.IntIntMap;
 import com.carrotsearch.hppc.IntStack;
-import com.techzealot.oop.vm.OpCode;
+import com.techzealot.brainfuck.oop.vm.OpCode;
 import lombok.Data;
 
 import java.util.ArrayList;

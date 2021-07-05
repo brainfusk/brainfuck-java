@@ -1,8 +1,8 @@
-package com.techzealot.optimizer.ir;
+package com.techzealot.brainfuck.optimizer.ir;
 
-import com.techzealot.oop.compiler.Code;
-import com.techzealot.oop.vm.Interpreter;
-import com.techzealot.oop.vm.Machine;
+import com.techzealot.brainfuck.oop.compiler.Code;
+import com.techzealot.brainfuck.oop.vm.Interpreter;
+import com.techzealot.brainfuck.oop.vm.Machine;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 

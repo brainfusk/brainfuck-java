@@ -1,4 +1,4 @@
-package com.techzealot.oop.compiler;
+package com.techzealot.brainfuck.oop.compiler;
 
 import lombok.SneakyThrows;
 import org.apache.commons.io.IOUtils;

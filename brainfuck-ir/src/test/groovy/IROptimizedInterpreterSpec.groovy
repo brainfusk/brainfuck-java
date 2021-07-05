@@ -1,4 +1,4 @@
-import com.techzealot.optimizer.ir.IRMain
+import com.techzealot.brainfuck.optimizer.ir.IRMain
 import spock.lang.Specification
 
 

@@ -1,13 +1,12 @@
-package com.techzealot.optimizer.ir;
+package com.techzealot.brainfuck.oop;
 
-import com.techzealot.oop.compiler.Code;
-import com.techzealot.oop.compiler.Compiler;
-import com.techzealot.oop.vm.Interpreter;
-import com.techzealot.oop.vm.Machine;
-import lombok.SneakyThrows;
+import com.techzealot.brainfuck.oop.compiler.Code;
+import com.techzealot.brainfuck.oop.compiler.Compiler;
+import com.techzealot.brainfuck.oop.vm.Machine;
+import com.techzealot.brainfuck.oop.vm.SimpleInterpreter;
 
-public class IRMain {
-    @SneakyThrows
+public class OopMain {
+
     public static void main(String[] args) {
         //1.prepare program data
         if (args.length != 1) {
@@ -18,9 +17,8 @@ public class IRMain {
         //2.compile program
         Compiler compiler = new Compiler();
         Code code = compiler.compile(programName);
-        Interpreter interpreter = new IRInterpreter();
-        //3.execute code
-        Machine machine = new Machine(System.in, System.out, interpreter);
+        //3.execute
+        Machine machine = new Machine(System.in, System.out, new SimpleInterpreter());
         machine.execute(code);
     }
 }
